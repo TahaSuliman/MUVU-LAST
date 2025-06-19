@@ -10,76 +10,100 @@ export default function PartnersSection() {
   const { t, isLoaded } = useLanguage()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
+  const [itemsPerView, setItemsPerView] = useState(1)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  // الشركاء الحقيقيين لشركة MUVU - using actual partner images
+  // الشركاء الحقيقيين لشركة MUVU - using updated partner images
   const partners = [
     {
       id: 1,
       name: "ETIHAD RAIL",
-      logo: "/images/partners/ETIHAD-RAIL.jpg",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ETIHAD-RAIL.jpg-Jlwu1jXlzNClDMEiXI99S7xQGvyzJm.jpeg",
       description: "UAE National Railway Network",
     },
     {
       id: 2,
       name: "ABU DHABI NATIONAL OIL COMPANY (ADNOC)",
-      logo: "/images/partners/ABU-DHAHI-NATIONAL-OIL-COMPANY-(ADNOC).png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ABU-DHAHI-NATIONAL-OIL-COMPANY-%28ADNOC%29-LarirO51quWNgICoxxc4IbtRcpDZnd.png",
       description: "Leading Energy Company",
     },
     {
       id: 3,
       name: "ABU DHABI PORTS GROUP (AD PORTS GROUP)",
-      logo: "/images/partners/AD-Ports-Group-Logo-PRL.jpg",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AD-Ports-Group-Logo-PRL.jpg-O8dARHN8zA7QCWLM8SO7aRten2t7pY.jpeg",
       description: "Port Operations & Logistics",
     },
     {
       id: 4,
       name: "DUBAI PORTS WORLD (DP WORLD)",
-      logo: "/images/partners/DUBAI-PORTS-WORLD-(DP-World).png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DUBAI-PORTS-WORLD-%28DP-World%29-VJWFzz4yp62DvrNV2wDvOYDks59Wpu.png",
       description: "Global Port Operator",
     },
     {
       id: 5,
       name: "DRYDOCKS WORLD",
-      logo: "/images/partners/Drydocks-World.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Drydocks-World-tLwVSAGA0OZeISikRqq8uqOJcHMZL7.png",
       description: "Maritime & Offshore Services",
     },
     {
       id: 6,
       name: "GOVERNMENT OF DUBAI",
-      logo: "/images/partners/GOVERNMENT-OF-DUBAI.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/GOVERNMENT-OF-DUBAI-fbIG3ye0o3ZM4Fp0m85khXwGvfPrX3.png",
       description: "Dubai Government Entity",
     },
     {
       id: 7,
       name: "AJMAN MUNICIPALITY PLANNING DEPARTMENT",
-      logo: "/images/partners/AJMAN-MUNICIPALITY-PLANNING-DEPARTMENT.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AJMAN-MUNICIPALITY-PLANNING-DEPARTMENT-lb3R418YUWR8ff3vuWYAeRtPhfiT8a.png",
       description: "Municipal Planning Authority",
     },
     {
       id: 8,
       name: "PORT OF FUJAIRAH",
-      logo: "/images/partners/PORT-OF-FUJAIRAH.jpg",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PORT-OF-FUJAIRAH.jpg-MIzjOekXkPH8byJ0c0uWBu8bnzboH3.jpeg",
       description: "Strategic Port Operations",
     },
     {
       id: 9,
       name: "SHARJAH GOVERNMENT",
-      logo: "/images/partners/SHARJAH-GOVERNMENT.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/SHARJAH-GOVERNMENT-bK1L6T6xfYcRSp8PTExC7BSCkIuD08.png",
       description: "Sharjah Government Entity",
     },
     {
       id: 10,
       name: "UNION COOP",
-      logo: "/images/partners/UNION-COOP.png",
+      logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/UNION-COOP-cs0LlcZKhqbWxNzuODlH9hfeZbzRmq.png",
       description: "Consumer Cooperative Society",
     },
   ]
 
-  const itemsPerView = 3
+  // تحديد عدد العناصر المعروضة حسب حجم الشاشة
+  useEffect(() => {
+    if (!mounted) return
+
+    const updateItemsPerView = () => {
+      const width = window.innerWidth
+      if (width < 768) {
+        // Mobile: عرض كارد واحد فقط
+        setItemsPerView(1)
+      } else if (width < 1024) {
+        // Tablet: عرض كاردين
+        setItemsPerView(2)
+      } else {
+        // Desktop: عرض 3 كاردات
+        setItemsPerView(3)
+      }
+    }
+
+    updateItemsPerView()
+    window.addEventListener("resize", updateItemsPerView)
+
+    return () => window.removeEventListener("resize", updateItemsPerView)
+  }, [mounted])
+
   const maxIndex = Math.max(0, partners.length - itemsPerView)
 
   useEffect(() => {
@@ -110,8 +134,8 @@ export default function PartnersSection() {
               <div className="h-12 bg-slate-700 animate-pulse rounded mb-6 max-w-md mx-auto"></div>
               <div className="w-24 h-1 bg-blue-400 mx-auto"></div>
             </div>
-            <div className="grid grid-cols-4 gap-4">
-              {[1, 2, 3, 4].map((i) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[1, 2, 3].map((i) => (
                 <div key={i} className="bg-white h-48 animate-pulse rounded-none"></div>
               ))}
             </div>
@@ -141,9 +165,13 @@ export default function PartnersSection() {
                 }}
               >
                 {partners.map((partner) => (
-                  <div key={partner.id} className="flex-shrink-0 px-4" style={{ width: `${100 / itemsPerView}%` }}>
+                  <div
+                    key={partner.id}
+                    className="flex-shrink-0 px-2 md:px-4"
+                    style={{ width: `${100 / itemsPerView}%` }}
+                  >
                     {/* Fixed height card container */}
-                    <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-none border-2 border-transparent hover:border-blue-400 group h-64 flex flex-col">
+                    <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-none border-2 border-transparent hover:border-blue-400 group h-56 flex flex-col">
                       {/* Logo container with fixed height */}
                       <div className="flex-shrink-0 h-32 p-4 flex items-center justify-center bg-gray-50">
                         <div className="relative w-full h-full">
@@ -152,16 +180,19 @@ export default function PartnersSection() {
                             alt={partner.name}
                             fill
                             className="object-contain group-hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           />
                         </div>
                       </div>
 
                       {/* Content container that fills remaining space */}
-                      <div className="flex-1 p-4 flex flex-col justify-center text-center">
-                        <h3 className="text-lg font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+                      <div className="flex-1 p-4 md:p-6 flex flex-col justify-center text-center">
+                        <h3 className="text-sm md:text-base lg:text-lg font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2 leading-tight">
                           {partner.name}
                         </h3>
-                        <p className="text-sm text-slate-600 line-clamp-2">{partner.description}</p>
+                        <p className="text-xs md:text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                          {partner.description}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -169,40 +200,47 @@ export default function PartnersSection() {
               </div>
             </div>
 
-            {/* Navigation Arrows */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 text-white hover:bg-blue-400/20 h-12 w-12 transition-all duration-300 hover:scale-110 rounded-none z-10 shadow-lg hover:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-blue-400"
-              onClick={prevSlide}
-              type="button"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 text-white hover:bg-blue-400/20 h-12 w-12 transition-all duration-300 hover:scale-110 rounded-none z-10 shadow-lg hover:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-blue-400"
-              onClick={nextSlide}
-              type="button"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
-
-            {/* Dots Indicator */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {Array.from({ length: maxIndex + 1 }).map((_, index) => (
-                <button
-                  key={index}
-                  className={`transition-all duration-300 rounded-none ${
-                    index === currentIndex ? "bg-blue-400 w-8 h-3" : "bg-slate-600 hover:bg-slate-500 w-3 h-3"
-                  }`}
-                  onClick={() => setCurrentIndex(index)}
+            {/* Navigation Arrows - مخفية في الموبايل إذا كان هناك عنصر واحد فقط */}
+            {maxIndex > 0 && (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 md:-translate-x-4 text-white hover:bg-blue-400/20 h-10 w-10 md:h-12 md:w-12 transition-all duration-300 hover:scale-110 rounded-none z-10 shadow-lg hover:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-blue-400"
+                  onClick={prevSlide}
                   type="button"
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
+                >
+                  <ChevronLeft className="h-4 w-4 md:h-6 md:w-6" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-2 md:translate-x-4 text-white hover:bg-blue-400/20 h-10 w-10 md:h-12 md:w-12 transition-all duration-300 hover:scale-110 rounded-none z-10 shadow-lg hover:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-blue-400"
+                  onClick={nextSlide}
+                  type="button"
+                >
+                  <ChevronRight className="h-4 w-4 md:h-6 md:w-6" />
+                </Button>
+              </>
+            )}
+
+            {/* Dots Indicator - يظهر فقط إذا كان هناك أكثر من صفحة واحدة */}
+            {maxIndex > 0 && (
+              <div className="flex justify-center mt-8 space-x-2">
+                {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+                  <button
+                    key={index}
+                    className={`transition-all duration-300 rounded-none ${
+                      index === currentIndex
+                        ? "bg-blue-400 w-6 md:w-8 h-2 md:h-3"
+                        : "bg-slate-600 hover:bg-slate-500 w-2 md:w-3 h-2 md:h-3"
+                    }`}
+                    onClick={() => setCurrentIndex(index)}
+                    type="button"
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

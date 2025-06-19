@@ -149,7 +149,7 @@ export default function HeroCarousel() {
                 style={{ transitionDelay: index === currentSlide ? "800ms" : "0ms" }}
               >
                 <button
-                  className="bg-blue-600 hover:bg-blue-700 text-blue-900 px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none border-t-2 border-b-2 border-black cursor-pointer font-medium text-lg z-20 relative transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none border-t-2 border-b-2 border-black cursor-pointer font-medium text-lg z-20 relative transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
                   onClick={handleDiscoverServices}
                   type="button"
                 >

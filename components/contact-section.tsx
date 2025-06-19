@@ -281,8 +281,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-600/50 text-blue-900 py-3 px-4 border-t-2 border-b-2 border-black transition-colors font-medium flex items-center justify-center space-x-2"
-                  aria-label={isSubmitting ? "Sending message" : "Send message"}
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-600/50 text-white py-3 px-4 border-t-2 border-b-2 border-black transition-colors font-medium flex items-center justify-center space-x-2"
                 >
                   {isSubmitting ? (
                     <>

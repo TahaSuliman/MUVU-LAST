@@ -29,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${tajwal.variable} ${inter.variable} font-sans`}>
+    <html lang="en" suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true} className={`${tajwal.variable} ${inter.variable} font-sans`}>
         <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
