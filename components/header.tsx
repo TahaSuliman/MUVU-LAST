@@ -98,7 +98,7 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className={`md:hidden transition-colors p-2 ${scrolled ? 'text-white' : 'text-slate-900'}`}
+              className="md:hidden transition-colors p-2 text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
