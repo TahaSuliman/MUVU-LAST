@@ -87,9 +87,22 @@ const config: Config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      clipPath: {
+        'navbar-bg': 'polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%)',
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function({ addUtilities }: { addUtilities: Function }) {
+      const newUtilities = {
+        '.clip-navbar-bg': {
+          clipPath: 'polygon(0% 0%, 85% 0%, 100% 100%, 0% 100%)',
+        },
+      }
+      addUtilities(newUtilities)
+    },
+  ],
 } satisfies Config
 
 export default config

@@ -28,7 +28,7 @@ export default function Footer() {
               className="hover:scale-105 transition-transform duration-300"
             >
               <Image
-                src="/images/muvu-logo.png"
+                src="/images/muvu-logo-footer.png"
                 alt="MUVU General Trading L.L.C"
                 width={120}
                 height={40}
