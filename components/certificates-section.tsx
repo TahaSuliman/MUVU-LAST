@@ -7,7 +7,7 @@ export default function CertificatesSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="certificates" className="py-20 bg-slate-900 relative scroll-mt-20">
+    <section id="certificates" className="py-20 bg-[#09203f] relative scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">

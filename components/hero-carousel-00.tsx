@@ -63,44 +63,35 @@ export default function HeroCarousel() {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
   }, [slides.length])
 
-  // تم تحسين دالة التمرير
   const scrollToSection = useCallback((sectionId: string, event?: React.MouseEvent) => {
-    console.log('Scrolling to section:', sectionId) // للتتبع
-    
     if (event) {
       event.preventDefault()
       event.stopPropagation()
     }
-    
     // Accept both with and without #
     const id = sectionId.replace(/^#/, "")
-    
-    // إزالة التأخير أو تقليله
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
-    } else {
-      // fallback: try querySelector
-      const el = document.querySelector(sectionId.startsWith('#') ? sectionId : `#${sectionId}`)
-      if (el) {
-        (el as HTMLElement).scrollIntoView({
+    setTimeout(() => {
+      const element = document.getElementById(id)
+      if (element) {
+        element.scrollIntoView({
           behavior: "smooth",
           block: "start",
         })
       } else {
-        console.warn('Element not found:', sectionId) // للتتبع
+        // fallback: try querySelector
+        const el = document.querySelector(sectionId.startsWith('#') ? sectionId : `#${sectionId}`)
+        if (el) {
+          (el as HTMLElement).scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          })
+        }
       }
-    }
+    }, 100);
   }, [])
 
   const handleDiscoverServices = useCallback(
     (event: React.MouseEvent) => {
-      console.log('Discover Services clicked') // للتتبع
-      event.preventDefault()
-      event.stopPropagation()
       scrollToSection("services", event)
     },
     [scrollToSection],
@@ -108,9 +99,6 @@ export default function HeroCarousel() {
 
   const handleContactUs = useCallback(
     (event: React.MouseEvent) => {
-      console.log('Contact Us clicked') // للتتبع
-      event.preventDefault()
-      event.stopPropagation()
       scrollToSection("contact", event)
     },
     [scrollToSection],
@@ -128,7 +116,6 @@ export default function HeroCarousel() {
           className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
             index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
           }`}
-          style={{ pointerEvents: index === currentSlide ? 'auto' : 'none' }} // مهم جداً
         >
           <Image
             src={slide.image || "/placeholder.svg"}
@@ -174,19 +161,15 @@ export default function HeroCarousel() {
                 style={{ transitionDelay: index === currentSlide ? "800ms" : "0ms" }}
               >
                 <button
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none border-t-2 border-b-2 border-black cursor-pointer font-medium text-lg relative transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
-                  style={{ zIndex: 1000, pointerEvents: 'auto' }}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none border-t-2 border-b-2 border-black cursor-pointer font-medium text-lg z-20 relative transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
                   onClick={handleDiscoverServices}
-                  onMouseDown={(e) => e.stopPropagation()}
                   type="button"
                 >
                   {isLoaded ? t("discoverServices") : "Discover Our Services"}
                 </button>
                 <button
-                  className="border-2 border-white border-t-2 border-b-2 border-t-blue-400 border-b-blue-400 text-white hover:bg-white hover:text-slate-900 px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none cursor-pointer font-medium text-lg relative bg-transparent transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
-                  style={{ zIndex: 1000, pointerEvents: 'auto' }}
+                  className="border-2 border-white border-t-2 border-b-2 border-t-blue-400 border-b-blue-400 text-white hover:bg-white hover:text-slate-900 px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none cursor-pointer font-medium text-lg z-20 relative bg-transparent transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
                   onClick={handleContactUs}
-                  onMouseDown={(e) => e.stopPropagation()}
                   type="button"
                 >
                   {isLoaded ? t("contactUs") : "Contact Us"}
@@ -197,7 +180,7 @@ export default function HeroCarousel() {
         </div>
       ))}
 
-      {/* Navigation Arrows -- */}
+      {/* Navigation Arrows */}
       <Button
         variant="ghost"
         size="icon"

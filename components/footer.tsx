@@ -18,7 +18,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-slate-900 border-t-2 border-blue-400">
+    <footer className="bg-[#163594] border-t border-blue-400">
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8 text-left">
           {/* Company Info */}

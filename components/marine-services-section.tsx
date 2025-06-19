@@ -37,7 +37,7 @@ export default function MarineServicesSection() {
   ]
 
   return (
-    <section className="py-20 bg-slate-900 relative scroll-mt-20 overflow-hidden">
+    <section className="py-20 bg-[#09203f] relative scroll-mt-20 overflow-hidden">
       {/* Light Particle Background */}
       <div className="absolute inset-0">
         <LightParticleBackground />

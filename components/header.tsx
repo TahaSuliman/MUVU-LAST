@@ -40,10 +40,10 @@ export default function Header() {
   }
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300 border-b border-blue-400`}>
       <div className="relative w-full h-full">
         {/* Dark background when scrolled */}
-        <div className={`absolute inset-0 transition-opacity duration-300 bg-slate-900
+        <div className={`absolute inset-0 transition-opacity duration-300 bg-[#09203f]
           ${scrolled ? 'opacity-100' : 'opacity-0'} ${isMenuOpen ? 'opacity-0' : ''}`} />
           
         {/* White background with slanted edge - always visible for logo area */}
@@ -113,7 +113,7 @@ export default function Header() {
           }`}
         >
           {/* Dark overlay that doesn't cover the logo area */}
-          <div className="absolute inset-0 bg-slate-900 backdrop-blur-sm">
+          <div className="absolute inset-0 bg-[#09203f] backdrop-blur-sm">
             <div className="absolute top-0 left-0 h-20 w-[75%] bg-transparent" />
           </div>
           <div className="container mx-auto px-4 py-24">

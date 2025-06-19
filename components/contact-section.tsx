@@ -88,7 +88,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-slate-800 relative">
+    <section id="contact" className="py-20 bg-[#09203f] relative scroll-mt-20">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
