@@ -65,33 +65,23 @@ export default function HeroCarousel() {
 
   // تم تحسين دالة التمرير
   const scrollToSection = useCallback((sectionId: string, event?: React.MouseEvent) => {
-    console.log('Scrolling to section:', sectionId) // للتتبع
-    
     if (event) {
       event.preventDefault()
       event.stopPropagation()
     }
-    
-    // Accept both with and without #
     const id = sectionId.replace(/^#/, "")
-    
-    // إزالة التأخير أو تقليله
     const element = document.getElementById(id)
     if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
+      const yOffset = -80 // adjust for fixed header height
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+      window.scrollTo({ top: y, behavior: "smooth" })
     } else {
       // fallback: try querySelector
       const el = document.querySelector(sectionId.startsWith('#') ? sectionId : `#${sectionId}`)
       if (el) {
-        (el as HTMLElement).scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        })
-      } else {
-        console.warn('Element not found:', sectionId) // للتتبع
+        const yOffset = -80
+        const y = (el as HTMLElement).getBoundingClientRect().top + window.pageYOffset + yOffset
+        window.scrollTo({ top: y, behavior: "smooth" })
       }
     }
   }, [])
