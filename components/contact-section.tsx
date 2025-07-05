@@ -108,9 +108,9 @@ export default function ContactSection() {
                       <Phone className="h-6 w-6 text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-white font-semibold">{t("phone")}</p>
-                      <p className="text-slate-300">+971 56 682 4101</p>
-                      <p className="text-slate-300">+971 56 777 0180</p>
+                      <p className="text-[#a7e4f6] font-semibold">{t("phone")}</p>
+                      <p className="text-white">+971 56 682 4101</p>
+                      <p className="text-white">+971 56 777 0180</p>
                     </div>
                   </div>
 
@@ -119,8 +119,8 @@ export default function ContactSection() {
                       <Mail className="h-6 w-6 text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-white font-semibold">{t("email")}</p>
-                      <p className="text-blue-400 font-semibold">info@muvu.ae</p>
+                      <p className="text-[#a7e4f6] font-semibold">{t("email")}</p>
+                      <p className="text-white font-semibold">info@muvu.ae</p>
                     </div>
                   </div>
 
@@ -129,8 +129,8 @@ export default function ContactSection() {
                       <Globe className="h-6 w-6 text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-white font-semibold">{t("website")}</p>
-                      <p className="text-slate-300">www.muvu.ae</p>
+                      <p className="text-[#a7e4f6] font-semibold">{t("website")}</p>
+                      <p className="text-white">www.muvu.ae</p>
                     </div>
                   </div>
 
@@ -139,8 +139,8 @@ export default function ContactSection() {
                       <MapPin className="h-6 w-6 text-blue-400" />
                     </div>
                     <div>
-                      <p className="text-white font-semibold">{t("address")}</p>
-                      <p className="text-slate-300">{t("addressValue")}</p>
+                      <p className="text-[#a7e4f6] font-semibold">{t("address")}</p>
+                      <p className="text-white">{t("addressValue")}</p>
                     </div>
                   </div>
                 </div>

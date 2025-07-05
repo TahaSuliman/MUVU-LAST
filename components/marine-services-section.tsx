@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Anchor, Shield, Zap, Wrench, Clock } from "lucide-react"
 import { useLanguage } from "@/components/language-context"
 import LightParticleBackground from "@/components/light-particle-background"
+import VerticalCarousel from "@/components/vertical-carousel"
 
 export default function MarineServicesSection() {
   const { t } = useLanguage()
@@ -79,13 +80,16 @@ export default function MarineServicesSection() {
                 </div>
               </div>
               <div className="relative h-full overflow-hidden border border-slate-600 hover:border-blue-400 transition-colors duration-300 rounded-none shadow-lg hover:shadow-xl">
-                <Image
-                  src="/images/marine-supply-container-ship.jpg"
-                  alt="Container Ship at Sea"
-                  fill
-                  className="object-cover hover:scale-105 transition-transform duration-300"
+                <VerticalCarousel
+                  images={[
+                    "/images/marine-supply-001.png",
+                    "/images/marine-supply-002.png",
+                    "/images/marine-supply-003.png",
+                    "/images/marine-supply-004.png",
+                    "/images/marine-supply-005.png"
+                  ]}
+                  altText="Marine Supply & Ship Chandler Services"
                 />
-                <div className="absolute inset-0 bg-slate-900/10 hover:bg-transparent transition-colors duration-300"></div>
               </div>
             </div>
 

@@ -1,11 +1,9 @@
 "use client"
-
 import Image from "next/image"
 import { useLanguage } from "@/components/language-context"
 
 export default function CertificatesSection() {
   const { t } = useLanguage()
-
   return (
     <section id="certificates" className="py-20 bg-[#09203f] relative scroll-mt-20">
       <div className="container mx-auto px-4">
@@ -14,14 +12,12 @@ export default function CertificatesSection() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{t("certificatesTitle")}</h2>
             <div className="w-24 h-1 bg-blue-400 mx-auto"></div>
           </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 text-left">
+          <div className="grid lg:grid-cols-10 gap-12 items-center">
+            <div className="lg:col-span-7 space-y-6 text-left">
               <p className="text-lg text-slate-300 leading-relaxed">{t("certificatesText1")}</p>
               <p className="text-lg text-slate-300 leading-relaxed">{t("certificatesText2")}</p>
             </div>
-
-            <div className="grid grid-cols-1 gap-8">
+            <div className="lg:col-span-3 grid grid-cols-1 gap-8">
               <div className="bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none border-2 border-transparent hover:border-blue-400">
                 <Image
                   src="/images/mohammed-bin-rashid-certificate.jpg"

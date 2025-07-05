@@ -25,7 +25,6 @@ export default function HomePage() {
           {isClient ? (
             <>
               <HeroCarouselClient />
-              <ParticleBackgroundClient />
             </>
           ) : (
             <HeroStaticContent />
@@ -109,11 +108,6 @@ function PartnersStaticContent() {
 import dynamic from "next/dynamic"
 
 const HeroCarouselClient = dynamic(() => import("@/components/hero-carousel"), {
-  ssr: false,
-  loading: () => null,
-})
-
-const ParticleBackgroundClient = dynamic(() => import("@/components/particle-background"), {
   ssr: false,
   loading: () => null,
 })
