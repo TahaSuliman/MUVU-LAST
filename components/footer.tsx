@@ -50,9 +50,7 @@ function Footer() {
             <p className="text-slate-400 text-sm">{t("companyDescription")}</p>
             <div className="flex space-x-4">
               <a
-                href="#"
-                className="text-slate-400 hover:text-blue-400 transition-colors p-2 border border-slate-600 hover:border-blue-400 rounded-none"
-              >
+                href="https://www.facebook.com/share/16RAJ98vqA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-blue-400 transition-colors p-2 border border-slate-600 hover:border-blue-400 rounded-none">
                 <Facebook className="h-5 w-5" />
               </a>
               <a
