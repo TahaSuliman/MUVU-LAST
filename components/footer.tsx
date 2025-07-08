@@ -152,4 +152,7 @@ function Footer() {
   )
 }
 
+
+/** Taha Suliman Ramadan */
+
 export default Footer
