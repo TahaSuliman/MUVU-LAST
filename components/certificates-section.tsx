@@ -4,6 +4,7 @@ import { useLanguage } from "@/components/language-context"
 
 export default function CertificatesSection() {
   const { t } = useLanguage()
+  
   return (
     <section id="certificates" className="py-20 bg-[#09203f] relative scroll-mt-20">
       <div className="container mx-auto px-4">
@@ -18,22 +19,22 @@ export default function CertificatesSection() {
               <p className="text-lg text-slate-300 leading-relaxed">{t("certificatesText2")}</p>
             </div>
             <div className="lg:col-span-3 grid grid-cols-1 gap-8">
-              <div className="bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none border-2 border-transparent hover:border-blue-400">
+              <div className="bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl border-2 border-transparent hover:border-blue-400">
                 <Image
                   src="/images/mohammed-bin-rashid-certificate.jpg"
                   alt="Mohammed Bin Rashid Establishment for SME Development Certificate"
                   width={400}
                   height={200}
-                  className="w-full h-auto rounded-none"
+                  className="w-full h-auto rounded-xl"
                 />
               </div>
-              <div className="bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-none border-2 border-transparent hover:border-blue-400">
+              <div className="bg-white p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl border-2 border-transparent hover:border-blue-400">
                 <Image
                   src="/images/national-program-certificate.png"
                   alt="National Program for Small and Medium Enterprises Certificate"
                   width={400}
                   height={200}
-                  className="w-full h-auto rounded-none"
+                  className="w-full h-auto rounded-xl"
                 />
               </div>
             </div>

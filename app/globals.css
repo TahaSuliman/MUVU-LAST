@@ -36,11 +36,6 @@
   }
 }
 
-/* Override all border-radius to be sharp */
-* {
-  border-radius: 0 !important;
-}
-
 /* Custom animations */
 @keyframes fade-in {
   from {
@@ -177,11 +172,6 @@ button,
 .button {
   font-family: var(--font-inter), system-ui, sans-serif;
   font-weight: 600;
-}
-
-/* Sharp corners for all elements */
-.rounded-none {
-  border-radius: 0 !important;
 }
 
 /* Enhanced hover effects */

@@ -30,6 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
+      <head>
+        <link rel="icon" href="/MUVU-ICON.ico" type="image/x-icon" />
+      </head>
       <body suppressHydrationWarning={true} className={`${tajwal.variable} ${inter.variable} font-sans`}>
         <LanguageProvider>{children}</LanguageProvider>
       </body>
