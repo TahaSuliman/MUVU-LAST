@@ -170,29 +170,16 @@ export default function PartnersSection() {
                     className="flex-shrink-0 px-2 md:px-4"
                     style={{ width: `${100 / itemsPerView}%` }}
                   >
-                    {/* Fixed height card container */}
-                    <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-none border-2 border-transparent hover:border-blue-400 group h-56 flex flex-col">
-                      {/* Logo container with fixed height */}
-                      <div className="flex-shrink-0 h-32 p-4 flex items-center justify-center bg-gray-50">
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={partner.logo || "/placeholder.svg"}
-                            alt={partner.name}
-                            fill
-                            className="object-contain group-hover:scale-105 transition-transform duration-300"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Content container that fills remaining space */}
-                      <div className="flex-1 p-4 md:p-6 flex flex-col justify-center text-center">
-                        <h3 className="text-sm md:text-base lg:text-lg font-bold text-slate-800 mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2 leading-tight">
-                          {partner.name}
-                        </h3>
-                        <p className="text-xs md:text-sm text-slate-600 line-clamp-2 leading-relaxed">
-                          {partner.description}
-                        </p>
+                    {/* Card container with image only */}
+                    <div className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-none border-2 border-transparent hover:border-blue-400 group h-48 p-4 flex items-center justify-center bg-gray-50">
+                      <div className="relative w-full h-full">
+                        <Image
+                          src={partner.logo || "/placeholder.svg"}
+                          alt={partner.name}
+                          fill
+                          className="object-contain group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
                       </div>
                     </div>
                   </div>
