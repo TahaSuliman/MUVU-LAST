@@ -163,61 +163,48 @@ export default function HeroCarousel() {
 										</div>
 /* Title with enhanced animation and white stroke and border */
 <>
-  <div
-	className={`hidden sm:inline-block transition-all duration-1000 ease-out ${
+  <h2
+	className={`hidden sm:block font-bold mb-2 sm:mb-3 leading-tight transition-all duration-1000 ease-out ${
 	  (mounted && currentSlide === index) || (!mounted && index === 0)
 		? "opacity-100 translate-y-0 scale-100"
 		: "opacity-0 translate-y-12 scale-95"
 	}`}
 	style={{
+	  fontSize: "3.2rem",
+	  color: "transparent",
+	  WebkitTextStroke: "2px #fff",
 	  border: "3px solid #fff",
 	  padding: "20px 30px",
+	  display: "inline-block",
 	  backgroundColor: "rgba(0, 0, 0, 0.1)",
 	  backdropFilter: "blur(5px)",
 	  transitionDelay:
 		(mounted && currentSlide === index) || (!mounted && index === 0) ? "500ms" : "0ms",
 	}}
   >
-	<h2
-	  className="font-bold mb-0 leading-tight"
-	  style={{
-		fontSize: "3.2rem",
-		color: "transparent",
-		WebkitTextStroke: "2px #fff",
-		margin: "0",
-	  }}
-	>
-	  {isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
-	</h2>
-  </div>
-  
-  <div
-	className={`sm:hidden inline-block transition-all duration-1000 ease-out ${
+	{isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
+  </h2>
+  <h3
+	className={`sm:hidden font-bold mb-2 sm:mb-3 leading-tight transition-all duration-1000 ease-out ${
 	  (mounted && currentSlide === index) || (!mounted && index === 0)
 		? "opacity-100 translate-y-0 scale-100"
 		: "opacity-0 translate-y-12 scale-95"
 	}`}
 	style={{
+	  fontSize: "2rem",
+	  color: "transparent",
+	  WebkitTextStroke: "1.2px #fff",
 	  border: "2px solid #fff",
 	  padding: "15px 20px",
+	  display: "inline-block",
 	  backgroundColor: "rgba(0, 0, 0, 0.1)",
 	  backdropFilter: "blur(5px)",
 	  transitionDelay:
 		(mounted && currentSlide === index) || (!mounted && index === 0) ? "500ms" : "0ms",
 	}}
   >
-	<h3
-	  className="font-bold mb-0 leading-tight"
-	  style={{
-		fontSize: "2rem",
-		color: "transparent",
-		WebkitTextStroke: "1.2px #fff",
-		margin: "0",
-	  }}
-	>
-	  {isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
-	</h3>
-  </div>
+	{isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
+  </h3>
 </>
 										{/* Description */}
 										<p
