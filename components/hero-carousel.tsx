@@ -150,7 +150,7 @@ export default function HeroCarousel() {
 										}}
 									>
 										{/* Subtitle */}
-<div className="mb-2 sm:mb-3">
+										<div className="mb-2 sm:mb-3">
 											<span
 												className="inline-block px-6 py-3 backdrop-blur-sm font-medium tracking-wide shadow-lg bg-transparent text-primary-foreground mb-6 sm:mb-8 leading-tight"
 												style={{
@@ -161,51 +161,43 @@ export default function HeroCarousel() {
 												{isLoaded ? t(`heroSubtitle${slide.id}`) : slide.subtitle}
 											</span>
 										</div>
-/* Title with enhanced animation and white stroke and border */
-<>
-  <h2
-	className={`hidden sm:block font-bold mb-2 sm:mb-3 leading-tight transition-all duration-1000 ease-out ${
-	  (mounted && currentSlide === index) || (!mounted && index === 0)
-		? "opacity-100 translate-y-0 scale-100"
-		: "opacity-0 translate-y-12 scale-95"
-	}`}
-	style={{
-	  fontSize: "3.2rem",
-	  color: "transparent",
-	  WebkitTextStroke: "2px #fff",
-	  border: "3px solid #fff",
-	  padding: "20px 30px",
-	  display: "inline-block",
-	  backgroundColor: "rgba(0, 0, 0, 0.1)",
-	  backdropFilter: "blur(5px)",
-	  transitionDelay:
-		(mounted && currentSlide === index) || (!mounted && index === 0) ? "500ms" : "0ms",
-	}}
-  >
-	{isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
-  </h2>
-  <h3
-	className={`sm:hidden font-bold mb-2 sm:mb-3 leading-tight transition-all duration-1000 ease-out ${
-	  (mounted && currentSlide === index) || (!mounted && index === 0)
-		? "opacity-100 translate-y-0 scale-100"
-		: "opacity-0 translate-y-12 scale-95"
-	}`}
-	style={{
-	  fontSize: "2rem",
-	  color: "transparent",
-	  WebkitTextStroke: "1.2px #fff",
-	  border: "2px solid #fff",
-	  padding: "15px 20px",
-	  display: "inline-block",
-	  backgroundColor: "rgba(0, 0, 0, 0.1)",
-	  backdropFilter: "blur(5px)",
-	  transitionDelay:
-		(mounted && currentSlide === index) || (!mounted && index === 0) ? "500ms" : "0ms",
-	}}
-  >
-	{isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
-  </h3>
-</>
+
+										{/* Title - Desktop version - Clean text only */}
+										<h2
+											className={`hidden sm:block font-bold mb-2 sm:mb-3 leading-tight transition-all duration-1000 ease-out ${
+												(mounted && currentSlide === index) || (!mounted && index === 0)
+													? "opacity-100 translate-y-0 scale-100"
+													: "opacity-0 translate-y-12 scale-95"
+											}`}
+											style={{
+												fontSize: "3.2rem",
+												color: "transparent",
+												WebkitTextStroke: "2px #fff",
+												transitionDelay:
+													(mounted && currentSlide === index) || (!mounted && index === 0) ? "500ms" : "0ms",
+											}}
+										>
+											{isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
+										</h2>
+										
+										{/* Title - Mobile version - Clean text only */}
+										<h3
+											className={`block sm:hidden font-bold mb-2 sm:mb-3 leading-tight transition-all duration-1000 ease-out ${
+												(mounted && currentSlide === index) || (!mounted && index === 0)
+													? "opacity-100 translate-y-0 scale-100"
+													: "opacity-0 translate-y-12 scale-95"
+											}`}
+											style={{
+												fontSize: "2rem",
+												color: "transparent",
+												WebkitTextStroke: "1.2px #fff",
+												transitionDelay:
+													(mounted && currentSlide === index) || (!mounted && index === 0) ? "500ms" : "0ms",
+											}}
+										>
+											{isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
+										</h3>
+
 										{/* Description */}
 										<p
 											className={`text-base sm:text-lg lg:text-xl text-primary-foreground/90 mb-10 sm:mb-12 leading-relaxed max-w-3xl mx-auto px-2 sm:px-0 transition-all duration-1000 ease-out ${

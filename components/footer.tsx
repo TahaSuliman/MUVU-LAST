@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Facebook, Twitter, Linkedin, Instagram } from "lucide-react"
 import { useLanguage } from "@/components/language-context"
+
 function Footer() {
   const { t } = useLanguage()
 
@@ -67,55 +68,70 @@ function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">{t("quickLinks")}</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#about" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("about");
-                }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
-                  {t("about")}
-                </a>
-              </li>
-              <li>
-                <a href="#services" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("services");
-                }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
-                  {t("services")}
-                </a>
-              </li>
-              <li>
-                <a href="#certificates" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("certificates");
-                }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
-                  {t("certificates")}
-                </a>
-              </li>
-              <li>
-                <a href="#partners" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("partners");
-                }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
-                  {t("partners")}
-                </a>
-              </li>
-              <li>
-                <a href="#contact" onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("contact");
-                }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
-                  {t("contact")}
-                </a>
-              </li>
-            </ul>
+          {/* Quick Links - Mobile: 50% width, Desktop: separate column */}
+          <div className="md:block">
+            <div className="grid grid-cols-2 gap-4 md:block">
+              <div>
+                <h3 className="text-white font-semibold mb-4">{t("quickLinks")}</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="#about" onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection("about");
+                    }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
+                      {t("about")}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#services" onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection("services");
+                    }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
+                      {t("services")}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#certificates" onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection("certificates");
+                    }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
+                      {t("certificates")}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#partners" onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection("partners");
+                    }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
+                      {t("partners")}
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#contact" onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection("contact");
+                    }} className="text-slate-400 hover:text-blue-400 transition-colors text-sm">
+                      {t("contact")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Services - Mobile: 50% width, Desktop: separate column */}
+              <div className="md:hidden">
+                <h3 className="text-white font-semibold mb-4">{t("services")}</h3>
+                <ul className="space-y-2">
+                  <li className="text-slate-400 text-sm">{t("generalTrading")}</li>
+                  <li className="text-slate-400 text-sm">{t("shipSupply")}</li>
+                  <li className="text-slate-400 text-sm">{t("marineServices")}</li>
+                  <li className="text-slate-400 text-sm">{t("privateLabel")}</li>
+                </ul>
+              </div>
+            </div>
           </div>
 
-          {/* Services */}
-          <div>
+          {/* Services - Desktop only */}
+          <div className="hidden md:block">
             <h3 className="text-white font-semibold mb-4">{t("services")}</h3>
             <ul className="space-y-2">
               <li className="text-slate-400 text-sm">{t("generalTrading")}</li>
@@ -147,7 +163,6 @@ function Footer() {
   )
 }
 
-
-/** Taha Suliman Ramadan */
+{/** Taha Suliman Ramadan */}
 
 export default Footer
