@@ -92,3 +92,20 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.custom-desc-padding {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
+
+/* في ملف CSS الخاص بك */
+.hero-carousel .custom-desc-style {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
+.text-slate-300 {
+  --tw-text-opacity: 1;
+  color: rgb(203 213 225/var(--tw-text-opacity,1));
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}

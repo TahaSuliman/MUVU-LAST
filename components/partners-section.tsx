@@ -167,7 +167,7 @@ export default function PartnersSection() {
                 {partners.map((partner) => (
                   <div
                     key={partner.id}
-                    className="flex-shrink-0 px-2 md:px-4"
+                    className="flex-shrink-0 px-[48px] md:px-4"
                     style={{ width: `${100 / itemsPerView}%` }}
                   >
                     {/* Card container with image only */}
@@ -193,7 +193,7 @@ export default function PartnersSection() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 md:-translate-x-4 text-white hover:bg-blue-400/20 h-10 w-10 md:h-12 md:w-12 transition-all duration-300 hover:scale-110 rounded-none z-10 shadow-lg hover:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-blue-400"
+                  className="bg-transparent absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 md:-translate-x-4 text-white hover:bg-blue-400/20 h-10 w-10 md:h-12 md:w-12 transition-all duration-300 hover:scale-110 rounded-none z-10 shadow-lg hover:shadow-xl backdrop-blur-sm border border-slate-600 hover:border-blue-400"
                   onClick={prevSlide}
                   type="button"
                 >
@@ -217,13 +217,13 @@ export default function PartnersSection() {
                 {Array.from({ length: maxIndex + 1 }).map((_, index) => (
                   <button
                     key={index}
-                    className={`transition-all duration-300 rounded-none ${
-                      index === currentIndex
-                        ? "bg-blue-400 w-6 md:w-8 h-2 md:h-3"
-                        : "bg-slate-600 hover:bg-slate-500 w-2 md:w-3 h-2 md:h-3"
-                    }`}
                     onClick={() => setCurrentIndex(index)}
-                    type="button"
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      currentIndex === index
+                        ? "bg-blue-400 scale-110"
+                        : "bg-slate-600 hover:bg-blue-400"
+                    }`}
+                    aria-label={`Slide ${index + 1}`}
                   />
                 ))}
               </div>

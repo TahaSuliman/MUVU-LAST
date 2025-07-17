@@ -74,7 +74,7 @@ export default function Header() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className="border-2 border-white border-t-2 border-b-2 border-t-blue-400 border-b-blue-400 
+                    className="border-t-2 border-b-2 border-t-blue-400 border-b-blue-400 border-l-0 border-r-0 
                       text-white hover:bg-white hover:text-slate-900 px-6 py-2.5 transition-all duration-300 
                       hover:scale-105 rounded-none cursor-pointer font-medium text-lg z-20 relative 
                       bg-transparent transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
@@ -124,7 +124,7 @@ export default function Header() {
                   onClick={() => scrollToSection(item.href)}
                   className={`text-white text-lg font-medium text-center transition-all duration-300 ${
                     item.href === "#contact"
-                      ? "border-2 border-white border-t-2 border-b-2 border-t-blue-400 border-b-blue-400 text-white hover:bg-white hover:text-slate-900 px-6 py-3 transition-all duration-300 hover:scale-105 rounded-none cursor-pointer bg-transparent transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
+                      ? "border-t-2 border-b-2 border-t-blue-400 border-b-blue-400 border-l-0 border-r-0 text-white hover:bg-white hover:text-slate-900 px-6 py-3 transition-all duration-300 hover:scale-105 rounded-none cursor-pointer bg-transparent transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
                       : "hover:text-blue-400 hover:bg-slate-800 bg-slate-900/80 backdrop-blur-sm px-6 py-3 w-full"
                   }`}
                 >

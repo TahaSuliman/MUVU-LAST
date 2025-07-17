@@ -4,13 +4,12 @@
   
   <!-- نمط الخطوط القطرية -->
   <defs>
-    <pattern id="diagonalLines" patternUnits="userSpaceOnUse" width="40" height="40" patternTransform="rotate(45)">
-      <rect width="40" height="40" fill="#09203F"/>
-      <line x1="0" y1="20" x2="40" y2="20" stroke="#0EA5E9" stroke-width="0.3" opacity="0.3"/>
+    <pattern id="diagonalLines" patternUnits="userSpaceOnUse" width="20" height="20" patternTransform="rotate(45)">
+      <rect width="20" height="20" fill="#09203F"/>
+      <line x1="0" y1="10" x2="20" y2="10" stroke="#0EA5E9" stroke-width="0.4" opacity="0.4"/>
     </pattern>
   </defs>
   
   <!-- تطبيق النمط على كامل المساحة -->
   <rect width="1200" height="300" fill="url(#diagonalLines)"/>
 </svg>
-

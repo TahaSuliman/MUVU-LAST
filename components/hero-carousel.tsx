@@ -1,248 +1,285 @@
 "use client"
 
-import type React from "react"
 import { useState, useEffect, useCallback } from "react"
-import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/components/language-context"
 
+const slides = [
+	{
+		id: 1,
+		image: "/images/dubai-skyline.png",
+		title: "MUVU General Trading",
+		subtitle: "Your trusted partner in general trading",
+		description: "We provide comprehensive trading solutions in the United Arab Emirates",
+	},
+	{
+		id: 2,
+		image: "/images/marine-shipping.png",
+		title: "High Quality Products",
+		subtitle: "Excellence in every detail",
+		description: "We import and export a diverse range of high-quality products",
+	},
+	{
+		id: 3,
+		image: "/images/port-operations-new.jpg",
+		title: "Marine Shipping Services",
+		subtitle: "Advanced logistics solutions",
+		description: "We provide comprehensive ship services across all major UAE ports",
+	},
+]
+
 export default function HeroCarousel() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isReady, setIsReady] = useState(false)
-  const { t, isLoaded } = useLanguage()
+	const [currentSlide, setCurrentSlide] = useState(0)
+	const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+	const [mounted, setMounted] = useState(false)
+	const { t, isLoaded } = useLanguage()
 
-  const slides = [
-    {
-      id: 1,
-      image: "/images/dubai-skyline.png",
-      title: "MUVU General Trading",
-      subtitle: "Your trusted partner in general trading",
-      description: "We provide comprehensive trading solutions in the United Arab Emirates",
-    },
-    {
-      id: 2,
-      image: "/images/port-operations-new.jpg",
-      title: "Marine Shipping Services",
-      subtitle: "Advanced logistics solutions",
-      description: "We provide comprehensive ship services across all major UAE ports",
-    },
-    {
-      id: 3,
-      image: "/images/marine-shipping.png",
-      title: "High Quality Products",
-      subtitle: "Excellence in every detail",
-      description: "We import and export a diverse range of high-quality products",
-    },
-  ]
+	useEffect(() => {
+		setMounted(true)
+	}, [])
 
-  useEffect(() => {
-    // Small delay to ensure client-side rendering
-    const timer = setTimeout(() => {
-      setIsReady(true)
-    }, 100)
+	useEffect(() => {
+		if (!isAutoPlaying || !mounted) return
+		const interval = setInterval(() => {
+			setCurrentSlide((prev) => (prev + 1) % slides.length)
+		}, 6000)
+		return () => clearInterval(interval)
+	}, [isAutoPlaying, mounted])
 
-    return () => clearTimeout(timer)
-  }, [])
+	const goToSlide = (index: number) => {
+		setCurrentSlide(index)
+	}
+	const goToPrevious = () => {
+		setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+	}
+	const goToNext = () => {
+		setCurrentSlide((prev) => (prev + 1) % slides.length)
+	}
+	const handleMouseEnter = () => setIsAutoPlaying(false)
+	const handleMouseLeave = () => setIsAutoPlaying(true)
 
-  useEffect(() => {
-    if (!isReady) return
+	// Scroll to section logic (copied from القديم)
+	const scrollToSection = useCallback(
+		(sectionId: string, event?: React.MouseEvent) => {
+			if (event) {
+				event.preventDefault()
+				event.stopPropagation()
+			}
+			const id = sectionId.replace(/^#/, "")
+			const element = document.getElementById(id)
+			if (element) {
+				const yOffset = -80
+				const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+				window.scrollTo({ top: y, behavior: "smooth" })
+			} else {
+				const el = document.querySelector(sectionId.startsWith("#") ? sectionId : `#${sectionId}`)
+				if (el) {
+					const yOffset = -80
+					const y = (el as HTMLElement).getBoundingClientRect().top + window.pageYOffset + yOffset
+					window.scrollTo({ top: y, behavior: "smooth" })
+				}
+			}
+		},
+		[]
+	)
 
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 8000)
+	const handleDiscoverServices = useCallback(
+		(event: React.MouseEvent) => {
+			event.preventDefault()
+			event.stopPropagation()
+			scrollToSection("services", event)
+		},
+		[scrollToSection]
+	)
 
-    return () => clearInterval(timer)
-  }, [slides.length, isReady])
+	const handleContactUs = useCallback(
+		(event: React.MouseEvent) => {
+			event.preventDefault()
+			event.stopPropagation()
+			scrollToSection("contact", event)
+		},
+		[scrollToSection]
+	)
 
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-  }, [slides.length])
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-  }, [slides.length])
-
-  // تم تحسين دالة التمرير
-  const scrollToSection = useCallback((sectionId: string, event?: React.MouseEvent) => {
-    if (event) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-    const id = sectionId.replace(/^#/, "")
-    const element = document.getElementById(id)
-    if (element) {
-      const yOffset = -80 // adjust for fixed header height
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
-      window.scrollTo({ top: y, behavior: "smooth" })
-    } else {
-      // fallback: try querySelector
-      const el = document.querySelector(sectionId.startsWith('#') ? sectionId : `#${sectionId}`)
-      if (el) {
-        const yOffset = -80
-        const y = (el as HTMLElement).getBoundingClientRect().top + window.pageYOffset + yOffset
-        window.scrollTo({ top: y, behavior: "smooth" })
-      }
-    }
-  }, [])
-
-  const handleDiscoverServices = useCallback(
-    (event: React.MouseEvent) => {
-      console.log('Discover Services clicked') // للتتبع
-      event.preventDefault()
-      event.stopPropagation()
-      scrollToSection("services", event)
-    },
-    [scrollToSection],
-  )
-
-  const handleContactUs = useCallback(
-    (event: React.MouseEvent) => {
-      console.log('Contact Us clicked') // للتتبع
-      event.preventDefault()
-      event.stopPropagation()
-      scrollToSection("contact", event)
-    },
-    [scrollToSection],
-  )
-
-  if (!isReady) {
-    return null
-  }
-
-  return (
-    <>
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-            index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
-          }`}
-          style={{ pointerEvents: index === currentSlide ? 'auto' : 'none' }} // مهم جداً
-        >
-          <Image
-            src={slide.image || "/placeholder.svg"}
-            alt={slide.title}
-            fill
-            className="object-cover"
-            priority={index === 0}
-          />
-          <div className="absolute inset-0 bg-[#09203f]/60" />
-
-          <div className="absolute inset-0 flex items-center justify-center z-10">
-            <div className="text-center text-white max-w-4xl px-4">
-              <h1
-                className={`text-5xl md:text-7xl font-bold mb-6 transition-all duration-1200 ease-out ${
-                  index === currentSlide ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
-                }`}
-                style={{ transitionDelay: index === currentSlide ? "200ms" : "0ms" }}
-              >
-                {isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
-              </h1>
-              <p
-                className={`text-xl md:text-2xl mb-4 text-blue-400 transition-all duration-1200 ease-out ${
-                  index === currentSlide ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
-                }`}
-                style={{ transitionDelay: index === currentSlide ? "400ms" : "0ms" }}
-              >
-                {isLoaded ? t(`heroSubtitle${slide.id}`) : slide.subtitle}
-              </p>
-              <p
-                className={`text-lg md:text-xl mb-8 text-slate-300 transition-all duration-1200 ease-out ${
-                  index === currentSlide ? "opacity-100 transform translate-y-0" : "opacity-0 transform translate-y-8"
-                }`}
-                style={{ transitionDelay: index === currentSlide ? "600ms" : "0ms" }}
-              >
-                {isLoaded ? t(`heroDescription${slide.id}`) : slide.description}
-              </p>
-              <div
-                className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1200 ease-out ${
-                  index === currentSlide
-                    ? "opacity-100 transform translate-y-0 scale-100"
-                    : "opacity-0 transform translate-y-8 scale-95"
-                }`}
-                style={{ transitionDelay: index === currentSlide ? "800ms" : "0ms" }}
-              >
-                <button
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none border-t-2 border-b-2 border-black cursor-pointer font-medium text-lg relative transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
-                  style={{ zIndex: 1000, pointerEvents: 'auto' }}
-                  onClick={handleDiscoverServices}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  type="button"
-                >
-                  {isLoaded ? t("discoverServices") : "Discover Our Services"}
-                </button>
-                <button
-                  className="border-2 border-white border-t-2 border-b-2 border-t-blue-400 border-b-blue-400 text-white hover:bg-white hover:text-slate-900 px-8 py-3 transition-all duration-300 hover:scale-105 rounded-none cursor-pointer font-medium text-lg relative bg-transparent transform hover:translate-y-[-2px] shadow-lg hover:shadow-xl"
-                  style={{ zIndex: 1000, pointerEvents: 'auto' }}
-                  onClick={handleContactUs}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  type="button"
-                >
-                  {isLoaded ? t("contactUs") : "Contact Us"}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
-
-      {/* Navigation Arrows -- */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 h-12 w-12 transition-all duration-300 hover:scale-110 rounded-none z-30 shadow-lg hover:shadow-xl backdrop-blur-sm"
-        onClick={prevSlide}
-        type="button"
-      >
-        <ChevronLeft className="h-8 w-8" />
-      </Button>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:bg-white/20 h-12 w-12 transition-all duration-300 hover:scale-110 rounded-none z-30 shadow-lg hover:shadow-xl backdrop-blur-sm"
-        onClick={nextSlide}
-        type="button"
-      >
-        <ChevronRight className="h-8 w-8" />
-      </Button>
-
-      {/* Dots Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-30">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            className={`transition-all duration-500 ease-out rounded-none shadow-md hover:shadow-lg ${
-              index === currentSlide
-                ? "bg-blue-400 w-8 h-3 scale-110"
-                : "bg-white/50 hover:bg-white/70 w-3 h-3 hover:scale-125"
-            }`}
-            onClick={() => setCurrentSlide(index)}
-            type="button"
-          />
-        ))}
-      </div>
-
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
-        <button
-          onClick={(e) => scrollToSection("about", e)}
-          className="w-6 h-10 border-2 border-white/50 flex justify-center rounded-none hover:border-blue-400 transition-all duration-300 cursor-pointer backdrop-blur-sm hover:scale-110 shadow-lg"
-          type="button"
-        >
-          <div className="w-1 h-3 bg-white/70 mt-2 animate-pulse rounded-none"></div>
-        </button>
-      </div>
-
-      {/* Slide Progress Bar */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-slate-800/50 z-30">
-        <div
-          className="h-full bg-gradient-to-r from-blue-400 to-blue-500 transition-all duration-5000 ease-linear"
-          style={{
-            width: `${((currentSlide + 1) / slides.length) * 100}%`,
-          }}
-        />
-      </div>
-    </>
-  )
+	return (
+		<div className="relative w-full h-screen overflow-hidden bg-background">
+			{/* Slides Container - Fade Transition */}
+			<div className="relative h-full" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+				{slides.map((slide, index) => (
+					<div
+						key={slide.id}
+						className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+							mounted && index === currentSlide
+								? "opacity-100 z-10"
+								: !mounted && index === 0
+								? "opacity-100 z-10"
+								: "opacity-0 z-0"
+						}`}
+					>
+						{/* Background Image with enhanced parallax effect */}
+						<div
+							className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 ease-out"
+							style={{
+								backgroundImage: `url(${slide.image})`,
+								transform: currentSlide === index ? "scale(1)" : "scale(1.05)",
+							}}
+						>
+							{/* Enhanced gradient overlay with #051b38 color and reduced transparency */}
+							<div
+								className="absolute inset-0"
+								style={{
+									background: `linear-gradient(to right, rgba(5, 27, 56, 0.45), rgba(5, 27, 56, 0.25), rgba(5, 27, 56, 0.35))`,
+								}}
+							/>
+						</div>
+						{/* Content - Perfect vertical centering */}
+						<div className="relative z-10 h-full flex items-center justify-center">
+							<div className="container mx-auto px-16 sm:px-20 lg:px-8">
+								<div className="max-w-4xl mx-auto text-center px-4 sm:px-0">
+									{/* Animated content with staggered entrance */}
+									<div
+										className={`transition-all duration-1000 ease-out ${
+											(mounted && currentSlide === index) || (!mounted && index === 0)
+												? "opacity-100 translate-y-0"
+												: "opacity-0 translate-y-8"
+										}`}
+										style={{
+											transitionDelay:
+												(mounted && currentSlide === index) || (!mounted && index === 0) ? "300ms" : "0ms",
+										}}
+									>
+										{/* Subtitle */}
+										<div className="mb-6 sm:mb-8">
+											<span
+												className="inline-block px-6 py-3 backdrop-blur-sm font-medium tracking-wide shadow-lg bg-transparent text-primary-foreground mb-6 sm:mb-8 leading-tight"
+												style={{
+													borderRadius: "0",
+													borderBottom: "2px solid #0ea5e9",
+												}}
+											>
+												{isLoaded ? t(`heroSubtitle${slide.id}`) : slide.subtitle}
+											</span>
+										</div>
+										{/* Title with enhanced animation */}
+										<h2
+											className={`font-bold mb-6 sm:mb-8 leading-tight transition-all duration-1000 ease-out ${
+												(mounted && currentSlide === index) || (!mounted && index === 0)
+													? "opacity-100 translate-y-0 scale-100"
+													: "opacity-0 translate-y-12 scale-95"
+											}`}
+											style={{
+												fontSize: "3.2rem",
+												color: "#0ea5e9",
+												transitionDelay:
+													(mounted && currentSlide === index) || (!mounted && index === 0) ? "500ms" : "0ms",
+											}}
+										>
+											{isLoaded ? t(`heroTitle${slide.id}`) : slide.title}
+										</h2>
+										{/* Description */}
+										<p
+											className={`text-base sm:text-lg lg:text-xl text-primary-foreground/90 mb-10 sm:mb-12 leading-relaxed max-w-3xl mx-auto px-2 sm:px-0 transition-all duration-1000 ease-out ${
+												(mounted && currentSlide === index) || (!mounted && index === 0)
+													? "opacity-100 translate-y-0"
+													: "opacity-0 translate-y-8"
+											}`}
+											style={{
+												transitionDelay:
+													(mounted && currentSlide === index) || (!mounted && index === 0) ? "700ms" : "0ms",
+											}}
+										>
+											{isLoaded ? t(`heroDescription${slide.id}`) : slide.description}
+										</p>
+										{/* CTA Buttons with enhanced animations */}
+										<div
+											className={`flex flex-col sm:flex-row gap-6 justify-center transition-all duration-1000 ease-out ${
+												(mounted && currentSlide === index) || (!mounted && index === 0)
+													? "opacity-100 translate-y-0"
+													: "opacity-0 translate-y-8"
+											}`}
+											style={{
+												transitionDelay:
+													(mounted && currentSlide === index) || (!mounted && index === 0) ? "900ms" : "0ms",
+											}}
+										>
+											<Button
+												size="lg"
+												className="text-primary-foreground px-8 py-4 text-lg sm:text-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl transform w-full sm:w-auto"
+												style={{ backgroundColor: "#0ea5e9", borderRadius: "0" }}
+												onClick={handleDiscoverServices}
+											>
+												{isLoaded ? t("services") : "Our Services"}
+											</Button>
+											<Button
+												variant="outline"
+												size="lg"
+												className="text-primary-foreground hover:bg-primary-foreground/10 px-8 py-4 text-lg sm:text-xl font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm bg-transparent w-full sm:w-auto"
+												style={{
+													backgroundColor: "transparent",
+													borderColor: "#0ea5e9",
+													borderWidth: "2px",
+													borderRadius: "0",
+												}}
+												onClick={handleContactUs}
+											>
+												{isLoaded ? t("contactUs") : "Contact Us"}
+											</Button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+			{/* Navigation Arrows */}
+			<Button
+				variant="ghost"
+				size="icon"
+				className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-20 bg-black/20 hover:bg-black/40 text-primary-foreground border border-primary-foreground/20 backdrop-blur-sm w-12 h-12 sm:w-14 sm:h-14 transition-all duration-300 hover:scale-110"
+				onClick={goToPrevious}
+				style={{ borderRadius: "0" }}
+			>
+				<ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+			</Button>
+			<Button
+				variant="ghost"
+				size="icon"
+				className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-20 bg-black/20 hover:bg-black/40 text-primary-foreground border border-primary-foreground/20 backdrop-blur-sm w-12 h-12 sm:w-14 sm:h-14 transition-all duration-300 hover:scale-110"
+				onClick={goToNext}
+				style={{ borderRadius: "0" }}
+			>
+				<ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+			</Button>
+			{/* Dots Navigation */}
+			<div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-20">
+				<div
+					className="flex space-x-3 bg-black/20 backdrop-blur-sm px-4 py-3 border border-primary-foreground/20"
+					style={{ borderRadius: "0" }}
+				>
+					{slides.map((_, index) => (
+						<button
+							key={index}
+							className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full transition-all duration-300 ${
+								(mounted && index === currentSlide) || (!mounted && index === 0)
+									? "bg-primary-foreground scale-125"
+									: "bg-primary-foreground/40 hover:bg-primary-foreground/70"
+							}`}
+							onClick={() => goToSlide(index)}
+						/>
+					))}
+				</div>
+			</div>
+			{/* Progress Bar */}
+			<div className="absolute bottom-0 left-0 w-full h-1 bg-black/20 z-20">
+				<div
+					className="h-full bg-primary transition-all duration-300 ease-linear"
+					style={{
+						width: `${((currentSlide + 1) / slides.length) * 100}%`,
+					}}
+				/>
+			</div>
+		</div>
+	)
 }
